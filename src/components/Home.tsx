@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import Content from "./Content";
 import Header from "./Header";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 function Home() {
     const [showModal, setShowModal] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -23,6 +24,8 @@ function Home() {
 
                 if (!data.isAuthenticated) {
                     navigate("/login");
+                } else {
+                    setIsAuthenticated(true);
                 }
             } catch (err) {
                 console.error("Error checking authentication", err);
@@ -34,8 +37,17 @@ function Home() {
 
     return (
         <>
-            <Header setShowModal={setShowModal} />
-            <Content showModal={showModal} setShowModal={setShowModal} />
+            {isAuthenticated ? (
+                <>
+                    <Header setShowModal={setShowModal} />
+                    <Content
+                        showModal={showModal}
+                        setShowModal={setShowModal}
+                    />
+                </>
+            ) : (
+                <Navigate to="/login" />
+            )}
         </>
     );
 }
