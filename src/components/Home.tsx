@@ -12,7 +12,7 @@ function Home() {
         const checkAuth = async () => {
             try {
                 const response = await axios.get(
-                    "https://calendarapi.onrender.com/auth/validate",
+                    "https://calendarjiapi.onrender.com/auth/validate",
                     {
                         withCredentials: true,
                     }
