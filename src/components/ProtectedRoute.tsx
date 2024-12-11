@@ -1,12 +1,17 @@
-import { Navigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
-import { ReactNode } from "react";
+import React from "react";
 
-function ProtectedRoute({ children }: { children: ReactNode }) {
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+    const navigate = useNavigate();
     const jwt_token = Cookies.get("jwt");
 
+    console.log("Token found " + jwt_token);
+
     if (!jwt_token) {
-        return <Navigate to="/login" />;
+        console.log("No token found");
+        navigate("/login");
+        return;
     }
 
     return <>{children}</>;
