@@ -2,6 +2,7 @@ import axios from "axios";
 import { Event } from "../types";
 
 const apiRoute = "https://calendarjiapi.onrender.com";
+// const apiRoute = "http://localhost:3000";
 
 export async function getAllEvents() {
     const response = await axios.get(`${apiRoute}/calendar/events`, {
