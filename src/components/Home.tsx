@@ -19,10 +19,9 @@ function Home() {
                     }
                 );
 
-                const data = await response.data;
-                console.log(data);
+                console.log(response.data);
 
-                if (!data.isAuthenticated) {
+                if (!response.data.isAuthenticated) {
                     navigate("/login");
                 } else {
                     setIsAuthenticated(true);
